@@ -62,14 +62,13 @@
           "name": "Nome integrazione",
           "address": "Indirizzo IP",
           "password": "Password",
-          "config_file_path": "Percorso del file di configurazione",
           "command_worker_count": "Numero di sessioni di comando simultanee",
           "generate_events": "Genera eventi in Home Assistant per ogni messaggio ricevuto",
           "discovery_by_activation": "Discovery passiva (rileva dispositivi da traffico bus)"
         },
         "data_description": {
           "name": "Nome visualizzato dell'integrazione nella pagina Dispositivi e servizi.",
-          "generate_events": "Se attivo, ogni messaggio OpenWebNet ricevuto genera un evento su Home Assistant (`myhome_message`). Utile per debug e automazioni avanzate, ma può aumentare il rumore eventi.",
+          "generate_events": "Se attivo, ogni messaggio OpenWebNet ricevuto genera un evento su Home Assistant (`bticino_myhome_message_event`). Utile per debug e automazioni avanzate, ma può aumentare il rumore eventi.",
           "discovery_by_activation": "Se attivo, il gateway registra gli endpoint che vede passare sul bus (luci, cover, climate, power) quando vengono usati fisicamente o da altre app."
         }
       }
@@ -78,7 +77,6 @@
       "invalid_ip": "Indirizzo IP non valido",
       "invalid_name": "Nome integrazione non valido",
       "invalid_worker_count": "I workers devono essere compresi tra 1 e 10",
-      "invalid_config_path": "Il file di configurazione non esiste in questo percorso",
       "invalid_password": "Password non valida",
       "password_error": "Errore password"
     }

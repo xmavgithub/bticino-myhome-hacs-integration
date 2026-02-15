@@ -62,14 +62,13 @@
           "name": "Nom de l'intégration",
           "address": "Adresse IP",
           "password": "Mot de passe",
-          "config_file_path": "Chemin du fichier de configuration",
           "command_worker_count": "Nombre de session de commande simultanées",
           "generate_events": "Générer des événements dans Home Assistant pour chaque message reçu",
           "discovery_by_activation": "Découverte passive (détection depuis le trafic du bus)"
         },
         "data_description": {
           "name": "Nom affiché de cette intégration dans Home Assistant.",
-          "generate_events": "Si activé, chaque message OpenWebNet reçu génère un événement Home Assistant (`myhome_message`). Utile pour le debug et les automatisations avancées, mais peut augmenter le bruit d'événements.",
+          "generate_events": "Si activé, chaque message OpenWebNet reçu génère un événement Home Assistant (`bticino_myhome_message_event`). Utile pour le debug et les automatisations avancées, mais peut augmenter le bruit d'événements.",
           "discovery_by_activation": "Si activé, la passerelle collecte passivement les endpoints vus sur le bus (lumières, volets, climate, power) pendant leur utilisation."
         }
       }
@@ -78,7 +77,6 @@
       "invalid_ip": "Adresse IP invalide",
       "invalid_name": "Nom d'intégration invalide",
       "invalid_worker_count": "Workers must be between 1 and 10",
-      "invalid_config_path": "Fichier de configuration inexistant à ce chemin",
       "invalid_password": "Mot de passe invalide",
       "password_error": "Mot de passe invalide"
     }

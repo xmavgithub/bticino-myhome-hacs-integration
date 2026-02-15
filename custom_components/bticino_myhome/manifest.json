@@ -1,5 +1,5 @@
 {
-  "domain": "myhome",
+  "domain": "bticino_myhome",
   "name": "bticino MyHome",
   "codeowners": [
     "@shiko-labs"
@@ -9,10 +9,10 @@
     "panel_custom",
     "http"
   ],
-  "documentation": "https://github.com/shiko-labs/myhome-homeassistant",
+  "documentation": "https://github.com/xmavgithub/bticino-myhome-hacs-integration",
   "integration_type": "hub",
   "iot_class": "local_polling",
-  "issue_tracker": "https://github.com/shiko-labs/myhome-homeassistant/issues",
+  "issue_tracker": "https://github.com/xmavgithub/bticino-myhome-hacs-integration/issues",
   "requirements": [
     "python-dateutil",
     "pytz"

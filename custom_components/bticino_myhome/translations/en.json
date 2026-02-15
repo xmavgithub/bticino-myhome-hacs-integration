@@ -62,14 +62,13 @@
           "name": "Integration name",
           "address": "IP address",
           "password": "Password",
-          "config_file_path": "Configuration file path",
           "command_worker_count": "Number of concurrent command sessions",
           "generate_events": "Generate events in Home Assistant for each message received",
           "discovery_by_activation": "Passive discovery (detect devices from bus traffic)"
         },
         "data_description": {
           "name": "Display name for this integration in Home Assistant.",
-          "generate_events": "When enabled, each received OpenWebNet message creates a Home Assistant event (`myhome_message`). Useful for debug and advanced automations, but can increase event noise.",
+          "generate_events": "When enabled, each received OpenWebNet message creates a Home Assistant event (`bticino_myhome_message_event`). Useful for debug and advanced automations, but can increase event noise.",
           "discovery_by_activation": "When enabled, the gateway passively collects endpoints seen on the bus (lights, covers, climate, power) while they are used."
         }
       }
@@ -78,7 +77,6 @@
       "invalid_ip": "Invalid IP address",
       "invalid_name": "Invalid integration name",
       "invalid_worker_count": "Workers must be between 1 and 10",
-      "invalid_config_path": "Configuration file does not exist at this path",
       "invalid_password": "Invalid password",
       "password_error": "Invalid password"
     }

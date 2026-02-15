@@ -30,7 +30,6 @@ from .const import (
     DISCOVERY_DEFAULT_POINT_END,
     DISCOVERY_DEFAULT_POINT_START,
     CONF_WORKER_COUNT,
-    CONF_FILE_PATH,
     CONF_GENERATE_EVENTS,
     DOMAIN,
     LOGGER,
@@ -39,7 +38,7 @@ from .validate import config_schema, format_mac
 from .gateway import MyHOMEGatewayHandler
 from .web import async_setup_web, async_unload_web
 from .config_store import (
-    async_get_or_migrate_gateway_config,
+    async_get_or_init_gateway_config,
 )
 
 CONFIG_SCHEMA = cv.config_entry_only_config_schema(DOMAIN)
@@ -62,11 +61,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     if entry.data[CONF_MAC] not in hass.data[DOMAIN]:
         hass.data[DOMAIN][entry.data[CONF_MAC]] = {}
 
-    _config_file_path = (
-        str(entry.options[CONF_FILE_PATH])
-        if CONF_FILE_PATH in entry.options
-        else "/config/myhome.yaml"
-    )
     _generate_events = (
         entry.options[CONF_GENERATE_EVENTS]
         if CONF_GENERATE_EVENTS in entry.options
@@ -74,10 +68,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     )
     _discovery_by_activation = True
 
-    raw_gateway_config = await async_get_or_migrate_gateway_config(
+    raw_gateway_config = await async_get_or_init_gateway_config(
         hass,
         entry.data[CONF_MAC],
-        _config_file_path,
     )
     _validated_config = config_schema({entry.data[CONF_MAC]: raw_gateway_config})
     hass.data[DOMAIN][entry.data[CONF_MAC]] = _validated_config[entry.data[CONF_MAC]]
@@ -428,7 +421,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
             {
                 "title": "MyHOME discovery results",
                 "message": "\n".join(summary_lines),
-                "notification_id": f"myhome_discovery_{gateway}",
+                "notification_id": f"bticino_myhome_discovery_{gateway}",
             },
             blocking=False,
         )
@@ -513,7 +506,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
             {
                 "title": "MyHOME activation discovery results",
                 "message": "\n".join(summary_lines),
-                "notification_id": f"myhome_activation_discovery_{gateway}",
+                "notification_id": f"bticino_myhome_activation_discovery_{gateway}",
             },
             blocking=False,
         )

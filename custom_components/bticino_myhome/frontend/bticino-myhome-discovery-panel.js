@@ -123,7 +123,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
       return;
     }
     try {
-      const response = await this._hass.callApi("POST", "myhome/discovery_by_activation", {
+      const response = await this._hass.callApi("POST", "bticino_myhome/discovery_by_activation", {
         gateway: this._state.gateway,
         enabled: true,
       });
@@ -145,7 +145,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
     this._error = "";
     this._render();
     try {
-      const response = await this._hass.callApi("GET", "myhome/gateways");
+      const response = await this._hass.callApi("GET", "bticino_myhome/gateways");
       this._gateways = response.gateways || [];
       if (!this._state.gateway && this._gateways.length > 0) {
         this._syncGatewayState(this._gateways[0].mac);
@@ -171,7 +171,10 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
     this._render();
     try {
       const encodedGateway = encodeURIComponent(this._state.gateway);
-      const response = await this._hass.callApi("GET", `myhome/configuration?gateway=${encodedGateway}`);
+      const response = await this._hass.callApi(
+        "GET",
+        `bticino_myhome/configuration?gateway=${encodedGateway}`,
+      );
       this._configDevices = response.devices || {};
     } catch (err) {
       this._error = err?.body?.message || err?.message || "Error loading configuration.";
@@ -265,7 +268,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
     }
 
     try {
-      this._result = await this._hass.callApi("POST", "myhome/activation_discovery", {
+      this._result = await this._hass.callApi("POST", "bticino_myhome/activation_discovery", {
         gateway: this._state.gateway,
         clear,
       });
@@ -329,7 +332,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
       }
 
       try {
-        await this._hass.callApi("POST", "myhome/configuration/device", body);
+        await this._hass.callApi("POST", "bticino_myhome/configuration/device", body);
         imported += 1;
       } catch (err) {
         failures.push(`${candidate.platform}:${candidate.address} -> ${err?.body?.message || err?.message || "error"}`);
@@ -388,7 +391,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
         body.class = this._state.manual_sensor_class;
       }
 
-      const response = await this._hass.callApi("POST", "myhome/configuration/device", body);
+      const response = await this._hass.callApi("POST", "bticino_myhome/configuration/device", body);
       this._configDevices = response.devices || this._configDevices;
       this._notice = `Device saved (${response.platform}:${response.key}).`;
       this._state.manual_key = "";
@@ -414,7 +417,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
     this._render();
 
     try {
-      const response = await this._hass.callApi("POST", "myhome/configuration/device_delete", {
+      const response = await this._hass.callApi("POST", "bticino_myhome/configuration/device_delete", {
         gateway: this._state.gateway,
         platform,
         key,
@@ -755,7 +758,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
 
     const errorBlock = this._error ? `<div class="error">${this._esc(this._error)}</div>` : "";
     const noticeBlock = this._notice ? `<div class="notice">${this._esc(this._notice)}</div>` : "";
-    const logoUrl = "/api/myhome/panel/bticino-logo.svg";
+    const logoUrl = "/api/bticino_myhome/panel/bticino-logo.svg";
 
     this.innerHTML = `
       <style>
@@ -1016,4 +1019,4 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
   }
 }
 
-customElements.define("myhome-discovery-panel", MyHOMEDiscoveryPanel);
+customElements.define("bticino-myhome-discovery-panel", MyHOMEDiscoveryPanel);

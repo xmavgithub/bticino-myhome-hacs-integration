@@ -39,12 +39,12 @@ from .config_store import (
 )
 from .validate import config_schema, format_mac
 
-PANEL_URL_PATH = "myhome-discovery"
-PANEL_WEBCOMPONENT_NAME = "myhome-discovery-panel"
+PANEL_URL_PATH = "bticino-myhome-discovery"
+PANEL_WEBCOMPONENT_NAME = "bticino-myhome-discovery-panel"
 PANEL_TITLE = "bticino MyHome Unofficial Integration"
 PANEL_ICON = "mdi:radar"
-PANEL_STATIC_URL_PATH = "/api/myhome/panel"
-PANEL_MODULE_URL = f"{PANEL_STATIC_URL_PATH}/myhome-discovery-panel.js"
+PANEL_STATIC_URL_PATH = "/api/bticino_myhome/panel"
+PANEL_MODULE_URL = f"{PANEL_STATIC_URL_PATH}/bticino-myhome-discovery-panel.js"
 WEB_RUNTIME_DATA = f"{DOMAIN}_web_runtime"
 LIGHT_PLATFORM = "light"
 COVER_PLATFORM = "cover"
@@ -322,8 +322,8 @@ def _build_discovery_snippet(
 class MyHOMEGatewaysView(HomeAssistantView):
     """Return configured gateways for panel UI."""
 
-    url = "/api/myhome/gateways"
-    name = "api:myhome:gateways"
+    url = "/api/bticino_myhome/gateways"
+    name = "api:bticino_myhome:gateways"
     requires_auth = True
 
     async def get(self, request):
@@ -352,8 +352,8 @@ class MyHOMEGatewaysView(HomeAssistantView):
 class MyHOMEConfigurationView(HomeAssistantView):
     """Read/write configured devices from panel UI."""
 
-    url = "/api/myhome/configuration"
-    name = "api:myhome:configuration"
+    url = "/api/bticino_myhome/configuration"
+    name = "api:bticino_myhome:configuration"
     requires_auth = True
 
     async def get(self, request):
@@ -378,8 +378,8 @@ class MyHOMEConfigurationView(HomeAssistantView):
 class MyHOMEConfigurationDeviceView(HomeAssistantView):
     """Upsert a single configured device from panel UI."""
 
-    url = "/api/myhome/configuration/device"
-    name = "api:myhome:configuration:device"
+    url = "/api/bticino_myhome/configuration/device"
+    name = "api:bticino_myhome:configuration:device"
     requires_auth = True
 
     async def post(self, request):
@@ -447,8 +447,8 @@ class MyHOMEConfigurationDeviceView(HomeAssistantView):
 class MyHOMEConfigurationDeleteView(HomeAssistantView):
     """Delete a configured device from panel UI."""
 
-    url = "/api/myhome/configuration/device_delete"
-    name = "api:myhome:configuration:device_delete"
+    url = "/api/bticino_myhome/configuration/device_delete"
+    name = "api:bticino_myhome:configuration:device_delete"
     requires_auth = True
 
     async def post(self, request):
@@ -489,8 +489,8 @@ class MyHOMEConfigurationDeleteView(HomeAssistantView):
 class MyHOMEConfigurationImportDiscoveryView(HomeAssistantView):
     """Import discovered devices into persistent configuration."""
 
-    url = "/api/myhome/configuration/import_discovery"
-    name = "api:myhome:configuration:import_discovery"
+    url = "/api/bticino_myhome/configuration/import_discovery"
+    name = "api:bticino_myhome:configuration:import_discovery"
     requires_auth = True
 
     async def post(self, request):
@@ -593,8 +593,8 @@ class MyHOMEConfigurationImportDiscoveryView(HomeAssistantView):
 class MyHOMEDiscoveryView(HomeAssistantView):
     """Run MyHOME discovery from the web panel."""
 
-    url = "/api/myhome/discovery"
-    name = "api:myhome:discovery"
+    url = "/api/bticino_myhome/discovery"
+    name = "api:bticino_myhome:discovery"
     requires_auth = True
 
     async def post(self, request):
@@ -739,8 +739,8 @@ class MyHOMEDiscoveryView(HomeAssistantView):
 class MyHOMEDiscoveryByActivationView(HomeAssistantView):
     """Keep discovery-by-activation enabled from panel UI."""
 
-    url = "/api/myhome/discovery_by_activation"
-    name = "api:myhome:discovery_by_activation"
+    url = "/api/bticino_myhome/discovery_by_activation"
+    name = "api:bticino_myhome:discovery_by_activation"
     requires_auth = True
 
     async def post(self, request):
@@ -789,8 +789,8 @@ class MyHOMEDiscoveryByActivationView(HomeAssistantView):
 class MyHOMEActivationDiscoveryResultsView(HomeAssistantView):
     """Return activation discovery results from panel UI."""
 
-    url = "/api/myhome/activation_discovery"
-    name = "api:myhome:activation_discovery"
+    url = "/api/bticino_myhome/activation_discovery"
+    name = "api:bticino_myhome:activation_discovery"
     requires_auth = True
 
     async def post(self, request):

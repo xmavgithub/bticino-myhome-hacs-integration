@@ -2,7 +2,7 @@
 import logging
 
 LOGGER = logging.getLogger(__package__)
-DOMAIN = "myhome"
+DOMAIN = "bticino_myhome"
 STORAGE_VERSION = 1
 STORAGE_KEY = f"{DOMAIN}_config"
 
@@ -44,7 +44,6 @@ CONF_MANUFACTURER = "manufacturer"
 CONF_MANUFACTURER_URL = "manufacturerURL"
 CONF_UDN = "UDN"
 CONF_WORKER_COUNT = "command_worker_count"
-CONF_FILE_PATH = "config_file_path"
 CONF_GENERATE_EVENTS = "generate_events"
 CONF_DISCOVERY_BY_ACTIVATION = "discovery_by_activation"
 CONF_PARENT_ID = "parent_id"

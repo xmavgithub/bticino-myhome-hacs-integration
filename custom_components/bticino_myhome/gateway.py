@@ -529,9 +529,9 @@ class MyHOMEGatewayHandler:
                         if isinstance(message, OWNMessage):
                             _event_content = {"gateway": str(self.gateway.host)}
                             _event_content.update(message.event_content)
-                            self.hass.bus.async_fire("myhome_message_event", _event_content)
+                            self.hass.bus.async_fire("bticino_myhome_message_event", _event_content)
                         else:
-                            self.hass.bus.async_fire("myhome_message_event", {"gateway": str(self.gateway.host), "message": str(message)})
+                            self.hass.bus.async_fire("bticino_myhome_message_event", {"gateway": str(self.gateway.host), "message": str(message)})
 
                     if isinstance(message, OWNMessage):
                         self._collect_discovery_result(message)
@@ -567,7 +567,7 @@ class MyHOMEGatewayHandler:
                                     is_event = True
                                     event = "on" if message.is_on else "off"
                                     self.hass.bus.async_fire(
-                                        "myhome_general_light_event",
+                                        "bticino_myhome_general_light_event",
                                         {"message": str(message), "event": event},
                                     )
                                     await asyncio.sleep(0.1)
@@ -576,7 +576,7 @@ class MyHOMEGatewayHandler:
                                     is_event = True
                                     event = "on" if message.is_on else "off"
                                     self.hass.bus.async_fire(
-                                        "myhome_area_light_event",
+                                        "bticino_myhome_area_light_event",
                                         {
                                             "message": str(message),
                                             "area": message.area,
@@ -589,7 +589,7 @@ class MyHOMEGatewayHandler:
                                     is_event = True
                                     event = "on" if message.is_on else "off"
                                     self.hass.bus.async_fire(
-                                        "myhome_group_light_event",
+                                        "bticino_myhome_group_light_event",
                                         {
                                             "message": str(message),
                                             "group": message.group,
@@ -606,7 +606,7 @@ class MyHOMEGatewayHandler:
                                     else:
                                         event = "stop"
                                     self.hass.bus.async_fire(
-                                        "myhome_general_automation_event",
+                                        "bticino_myhome_general_automation_event",
                                         {"message": str(message), "event": event},
                                     )
                                 elif message.is_area:
@@ -618,7 +618,7 @@ class MyHOMEGatewayHandler:
                                     else:
                                         event = "stop"
                                     self.hass.bus.async_fire(
-                                        "myhome_area_automation_event",
+                                        "bticino_myhome_area_automation_event",
                                         {
                                             "message": str(message),
                                             "area": message.area,
@@ -634,7 +634,7 @@ class MyHOMEGatewayHandler:
                                     else:
                                         event = "stop"
                                     self.hass.bus.async_fire(
-                                        "myhome_group_automation_event",
+                                        "bticino_myhome_group_automation_event",
                                         {
                                             "message": str(message),
                                             "group": message.group,
@@ -693,7 +693,7 @@ class MyHOMEGatewayHandler:
                         else:
                             event = None
                         self.hass.bus.async_fire(
-                            "myhome_cenplus_event",
+                            "bticino_myhome_cenplus_event",
                             {
                                 "object": int(message.object),
                                 "pushbutton": int(message.push_button),
@@ -718,7 +718,7 @@ class MyHOMEGatewayHandler:
                         else:
                             event = None
                         self.hass.bus.async_fire(
-                            "myhome_cen_event",
+                            "bticino_myhome_cen_event",
                             {
                                 "object": int(message.object),
                                 "pushbutton": int(message.push_button),

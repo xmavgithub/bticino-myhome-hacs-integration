@@ -3,10 +3,8 @@
 from __future__ import annotations
 
 from copy import deepcopy
-from pathlib import Path
 from typing import Any
 
-import yaml
 from homeassistant.const import CONF_MAC
 from homeassistant.helpers.storage import Store
 
@@ -116,31 +114,10 @@ async def async_clear_activation_discovery_results(hass, gateway: str) -> None:
         await async_save_data(hass, data)
 
 
-def _read_yaml_file(path: str) -> dict[str, Any] | None:
-    file_path = Path(path)
-    if not file_path.exists():
-        return None
-    content = file_path.read_text(encoding="utf-8")
-    parsed = yaml.safe_load(content)
-    return parsed if isinstance(parsed, dict) else None
-
-
-async def async_get_or_migrate_gateway_config(
-    hass,
-    gateway: str,
-    yaml_path: str,
-) -> dict[str, Any]:
-    """Return gateway config from storage, migrating once from YAML if needed."""
+async def async_get_or_init_gateway_config(hass, gateway: str) -> dict[str, Any]:
+    """Return gateway config from storage, initializing an empty one when absent."""
     if stored := await async_get_gateway_config(hass, gateway):
         return stored
-
-    migrated = await hass.async_add_executor_job(_read_yaml_file, yaml_path)
-    if isinstance(migrated, dict):
-        migrated_gateway = migrated.get(gateway)
-        if isinstance(migrated_gateway, dict):
-            payload = _normalize_gateway_payload(gateway, migrated_gateway)
-            await async_set_gateway_config(hass, gateway, payload)
-            return payload
 
     empty = {CONF_MAC: gateway}
     await async_set_gateway_config(hass, gateway, empty)

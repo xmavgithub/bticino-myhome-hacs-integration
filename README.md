@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="custom_components/myhome/frontend/bticino-logo.svg" alt="bticino logo" width="180" />
+  <img src="custom_components/bticino_myhome/frontend/bticino-logo.svg" alt="bticino logo" width="180" />
 </p>
 
 # bticino MyHome Unofficial Integration
@@ -20,7 +20,7 @@ This repository maintains and evolves a fork of the original MyHome integration,
 - gateway setup through Home Assistant Config Flow
 - supported platforms: `light`, `cover`, `climate`, `sensor`, `switch`, `binary_sensor`
 - custom MyHome services (`sync_time`, `send_message`, discovery services)
-- device configuration from web UI (no mandatory `myhome.yml` dependency)
+- device configuration from web UI (no YAML dependency)
 - direct import of discovered devices into runtime configuration
 - manual add/remove of devices from the UI
 - power endpoint discovery support (`WHO 18`)
@@ -55,7 +55,7 @@ Optional direct link:
 
 ### Manual
 
-1. Copy `custom_components/myhome` to `config/custom_components/myhome`.
+1. Copy `custom_components/bticino_myhome` to `config/custom_components/bticino_myhome`.
 2. Restart Home Assistant.
 3. Add and configure `bticino MyHome` from `Settings` -> `Devices & Services`.
 
@@ -67,18 +67,10 @@ Use the integration web panel to manage devices:
 - import discovered devices into configuration
 - manual device creation and deletion
 
-## Legacy YAML Migration
-
-If a legacy YAML file (for example `myhome.yml`) is present, it can be used for one-time migration into integration storage.
-
-Example legacy file:
-
-- `examples/myhome.yml`
-
 ## Troubleshooting
 
 - If entities stop updating after changes, restart Home Assistant.
-- If discovery fails, inspect logs for `custom_components.myhome`.
+- If discovery fails, inspect logs for `custom_components.bticino_myhome`.
 - Verify gateway reachability, IP address, and credentials.
 
 ## Fork Credits
