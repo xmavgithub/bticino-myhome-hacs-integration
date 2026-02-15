@@ -18,8 +18,8 @@ from homeassistant.components.button import DOMAIN as BUTTON
 from homeassistant.components.sensor import DOMAIN as SENSOR
 from homeassistant.components.climate import DOMAIN as CLIMATE
 
-from OWNd.connection import OWNSession, OWNEventSession, OWNCommandSession, OWNGateway
-from OWNd.message import (
+from .OWNd.connection import OWNSession, OWNEventSession, OWNCommandSession, OWNGateway
+from .OWNd.message import (
     OWNMessage,
     OWNLightingEvent,
     OWNLightingCommand,

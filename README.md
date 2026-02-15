@@ -1,4 +1,8 @@
-# MyHOME Home Assistant Integration
+<p align="left">
+  <img src="custom_components/myhome/frontend/bticino-logo.svg" alt="bticino logo" width="180" />
+</p>
+
+# bticino MyHome Home Assistant Unofficial Integration
 
 Integrazione custom per collegare gateway BTicino/Legrand MyHOME a Home Assistant tramite OpenWebNet.
 
@@ -20,6 +24,7 @@ Questa repository mantiene e sviluppa una versione forkata dell'integrazione MyH
 - discovery attiva e import diretto in configurazione
 - inserimento e rimozione manuale dispositivi da UI
 - supporto discovery power (WHO 18)
+- libreria OWNd (autore: anotherjulien) vendorizzata nell'integrazione (versione 0.7.49)
 
 ## Requisiti
 

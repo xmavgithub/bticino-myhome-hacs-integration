@@ -41,7 +41,7 @@ from .validate import config_schema, format_mac
 
 PANEL_URL_PATH = "myhome-discovery"
 PANEL_WEBCOMPONENT_NAME = "myhome-discovery-panel"
-PANEL_TITLE = "bticino MyHome"
+PANEL_TITLE = "bticino MyHome Unofficial Integration"
 PANEL_ICON = "mdi:radar"
 PANEL_STATIC_URL_PATH = "/api/myhome/panel"
 PANEL_MODULE_URL = f"{PANEL_STATIC_URL_PATH}/myhome-discovery-panel.js"

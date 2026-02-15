@@ -14,7 +14,8 @@
   "iot_class": "local_polling",
   "issue_tracker": "https://github.com/shiko-labs/myhome-homeassistant/issues",
   "requirements": [
-    "OWNd==0.7.48"
+    "python-dateutil",
+    "pytz"
   ],
   "ssdp": [
     {

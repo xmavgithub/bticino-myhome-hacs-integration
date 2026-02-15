@@ -1,6 +1,6 @@
 """MyHOME integration."""
 
-from OWNd.message import OWNCommand, OWNGatewayCommand
+from .OWNd.message import OWNCommand, OWNGatewayCommand
 
 from homeassistant.config_entries import SOURCE_REAUTH, ConfigEntry
 from homeassistant.core import HomeAssistant
