@@ -1,19 +1,19 @@
 #!/bin/bash
 
-# Script per visualizzare i log del test environment
+# Script to view test environment logs
 
 echo "📊 Log Home Assistant - MyHOME Integration"
 echo "=========================================="
 echo ""
 
 if docker ps --format '{{.Names}}' | grep -q '^homeassistant-dev$'; then
-    echo "Premi Ctrl+C per uscire"
+    echo "Press Ctrl+C to exit"
     echo ""
     docker-compose logs -f homeassistant
 else
-    echo "❌ Container non in esecuzione!"
+    echo "❌ Container is not running!"
     echo ""
-    echo "Avvia prima l'ambiente di test:"
+    echo "Start the test environment first:"
     echo "   ./start_test.sh"
     exit 1
 fi

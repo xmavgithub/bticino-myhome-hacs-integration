@@ -413,7 +413,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
             f"Climate zones found: **{len(climate_results)}**",
             f"Power sensors found: **{len(power_results)}**",
             "",
-            "Open the MyHOME Discovery panel and use `Importa nuovi in configurazione` to add them.",
+            "Open the MyHOME Discovery panel and use `Import selected into configuration` to add them.",
         ]
         if suggestion_lines:
             summary_lines.append("")
@@ -498,7 +498,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
             f"Climate zones found: **{len(climate_results)}**",
             f"Power sensors found: **{len(power_results)}**",
             "",
-            "Open the MyHOME Discovery panel and use `Importa nuovi in configurazione` to add them.",
+            "Open the MyHOME Discovery panel and use `Import selected into configuration` to add them.",
         ]
         if suggestion_lines:
             summary_lines.append("")

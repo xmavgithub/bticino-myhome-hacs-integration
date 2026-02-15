@@ -4,11 +4,11 @@ services:
     container_name: homeassistant-dev
     image: "ghcr.io/home-assistant/home-assistant:stable"
     volumes:
-      # Monta la directory del progetto come custom_component
+      # Mount project directory as custom components
       - ./custom_components:/config/custom_components
-      # Monta la configurazione
+      # Mount Home Assistant configuration
       - ./config:/config
-      # Directory per persistenza dati
+      # Storage directory for persistent data
       - ./ha_data:/config/.storage
     environment:
       - TZ=Europe/Rome

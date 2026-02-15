@@ -1,24 +1,24 @@
 #!/bin/bash
 
-# Script per fermare l'ambiente di test MyHOME
+# Script to stop the MyHOME test environment
 
-echo "🛑 Arresto Home Assistant Test Environment"
+echo "🛑 Stopping Home Assistant Test Environment"
 echo "=========================================="
 echo ""
 
 if docker ps --format '{{.Names}}' | grep -q '^homeassistant-dev$'; then
-    echo "📦 Arresto container..."
+    echo "📦 Stopping container..."
     docker-compose down
 
     echo ""
-    echo "✅ Container arrestato!"
+    echo "✅ Container stopped!"
     echo ""
-    echo "Per riavviare:"
+    echo "To start again:"
     echo "   ./start_test.sh"
     echo ""
-    echo "Per eliminare tutti i dati:"
+    echo "To delete all data:"
     echo "   docker-compose down -v"
     echo "   rm -rf ha_data/"
 else
-    echo "ℹ️  Container non in esecuzione"
+    echo "ℹ️  Container is not running"
 fi

@@ -156,7 +156,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
       await this._loadConfiguration();
       await this._showActivationResults(false, false);
     } catch (err) {
-      this._error = `Errore caricamento gateway: ${err?.body?.message || err?.message || "sconosciuto"}`;
+      this._error = `Error loading gateways: ${err?.body?.message || err?.message || "unknown"}`;
     } finally {
       this._loadingGateways = false;
       this._render();
@@ -174,7 +174,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
       const response = await this._hass.callApi("GET", `myhome/configuration?gateway=${encodedGateway}`);
       this._configDevices = response.devices || {};
     } catch (err) {
-      this._error = err?.body?.message || err?.message || "Errore caricamento configurazione.";
+      this._error = err?.body?.message || err?.message || "Error loading configuration.";
     } finally {
       this._loadingConfig = false;
       this._render();
@@ -272,10 +272,10 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
       this._state.discovery_by_activation = !!this._result.enabled;
       this._refreshCandidateDrafts();
       if (clear) {
-        this._notice = "Elenco discovery automatica svuotato.";
+        this._notice = "Automatic discovery list cleared.";
       }
     } catch (err) {
-      this._error = err?.body?.message || err?.message || "Impossibile leggere i risultati discovery automatica.";
+      this._error = err?.body?.message || err?.message || "Unable to read automatic discovery results.";
     } finally {
       this._loadingActivation = false;
       this._render();
@@ -289,7 +289,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
 
     const selected = this._candidateEntries().filter((entry) => entry.selected);
     if (selected.length === 0) {
-      this._notice = "Nessun dispositivo selezionato da importare.";
+      this._notice = "No selected devices to import.";
       this._error = "";
       this._render();
       return;
@@ -332,7 +332,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
         await this._hass.callApi("POST", "myhome/configuration/device", body);
         imported += 1;
       } catch (err) {
-        failures.push(`${candidate.platform}:${candidate.address} -> ${err?.body?.message || err?.message || "errore"}`);
+        failures.push(`${candidate.platform}:${candidate.address} -> ${err?.body?.message || err?.message || "error"}`);
       }
     }
 
@@ -340,10 +340,10 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
     await this._showActivationResults(false, false);
 
     if (imported > 0) {
-      this._notice = `Import completato: ${imported} dispositivi.`;
+      this._notice = `Import completed: ${imported} devices.`;
     }
     if (failures.length > 0) {
-      this._error = `Import parziale. Errori: ${failures.join(" | ")}`;
+      this._error = `Partial import. Errors: ${failures.join(" | ")}`;
     }
 
     this._savingConfig = false;
@@ -390,13 +390,13 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
 
       const response = await this._hass.callApi("POST", "myhome/configuration/device", body);
       this._configDevices = response.devices || this._configDevices;
-      this._notice = `Dispositivo salvato (${response.platform}:${response.key}).`;
+      this._notice = `Device saved (${response.platform}:${response.key}).`;
       this._state.manual_key = "";
       this._state.manual_name = "";
       this._state.manual_address = "";
       await this._loadConfiguration();
     } catch (err) {
-      this._error = err?.body?.message || err?.message || "Salvataggio dispositivo fallito.";
+      this._error = err?.body?.message || err?.message || "Device save failed.";
     } finally {
       this._savingConfig = false;
       this._render();
@@ -420,10 +420,10 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
         key,
       });
       this._configDevices = response.devices || this._configDevices;
-      this._notice = `Dispositivo rimosso (${platform}:${key}).`;
+      this._notice = `Device removed (${platform}:${key}).`;
       await this._loadConfiguration();
     } catch (err) {
-      this._error = err?.body?.message || err?.message || "Rimozione dispositivo fallita.";
+      this._error = err?.body?.message || err?.message || "Device removal failed.";
     } finally {
       this._savingConfig = false;
       this._render();
@@ -510,7 +510,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
 
   _renderGatewayOptions() {
     if (this._gateways.length === 0) {
-      return '<option value="">Nessun gateway</option>';
+      return '<option value="">No gateway available</option>';
     }
 
     return this._gateways
@@ -523,7 +523,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
 
   _renderConfigDevices() {
     if (this._loadingConfig) {
-      return '<div class="subtle">Caricamento configurazione...</div>';
+      return '<div class="subtle">Loading configuration...</div>';
     }
 
     const devices = this._configDevices || {};
@@ -582,7 +582,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
                 <td>${this._esc(item.name || "-")}</td>
                 <td><code>${this._esc(address)}</code></td>
                 <td>${renderDetails(item, platform)}</td>
-                <td><button type="button" class="danger" data-delete-platform="${platform}" data-delete-key="${this._esc(item.key)}">Rimuovi</button></td>
+                <td><button type="button" class="danger" data-delete-platform="${platform}" data-delete-key="${this._esc(item.key)}">Remove</button></td>
               </tr>
             `;
           })
@@ -593,10 +593,10 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
             <h4>${platform} (${items.length})</h4>
             <table>
               <thead>
-                <tr><th>Key</th><th>Nome</th><th>Address</th><th>Dettagli</th><th></th></tr>
+                <tr><th>Key</th><th>Name</th><th>Address</th><th>Details</th><th></th></tr>
               </thead>
               <tbody>
-                ${rows || '<tr><td colspan="5" class="subtle">Nessun dispositivo</td></tr>'}
+                ${rows || '<tr><td colspan="5" class="subtle">No devices</td></tr>'}
               </tbody>
             </table>
           </section>
@@ -605,7 +605,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
       .join("");
 
     return `
-      <div class="subtle">Dispositivi configurati: <strong>${total}</strong></div>
+      <div class="subtle">Configured devices: <strong>${total}</strong></div>
       ${blocks}
     `;
   }
@@ -613,10 +613,10 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
   _renderDiscoveryCandidates() {
     const header = `
       <div class="row-between">
-        <h3>Dispositivi trovati (discovery automatica)</h3>
+        <h3>Discovered devices (automatic discovery)</h3>
         <div class="actions">
-          <button id="show_activation_discovery" type="button" ${this._loadingActivation ? "disabled" : ""}>${this._loadingActivation ? "Aggiornamento..." : "Aggiorna risultati"}</button>
-          <button id="show_activation_discovery_clear" type="button" ${this._loadingActivation ? "disabled" : ""}>Svuota elenco</button>
+          <button id="show_activation_discovery" type="button" ${this._loadingActivation ? "disabled" : ""}>${this._loadingActivation ? "Refreshing..." : "Refresh results"}</button>
+          <button id="show_activation_discovery_clear" type="button" ${this._loadingActivation ? "disabled" : ""}>Clear list</button>
         </div>
       </div>
     `;
@@ -625,7 +625,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
       return `
         <section class="panel result">
           ${header}
-          <p class="subtle">Nessun risultato disponibile ancora. Attiva fisicamente i dispositivi e poi premi "Aggiorna risultati".</p>
+          <p class="subtle">No results available yet. Trigger devices physically, then press "Refresh results".</p>
         </section>
       `;
     }
@@ -636,7 +636,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
     const summary = `
       <p class="subtle">
         Gateway: <code>${this._esc(this._result.gateway)}</code> |
-        nuovi: luci <strong>${this._result.new_light?.length || 0}</strong>,
+        new: lights <strong>${this._result.new_light?.length || 0}</strong>,
         cover <strong>${this._result.new_cover?.length || 0}</strong>,
         climate <strong>${this._result.new_climate?.length || 0}</strong>,
         power <strong>${this._result.new_power?.length || 0}</strong>
@@ -648,7 +648,7 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
         <section class="panel result">
           ${header}
           ${summary}
-          <p class="subtle">Non ci sono nuovi dispositivi da importare. Quelli rilevati sono già configurati o non ancora attivati.</p>
+          <p class="subtle">No new devices to import. Detected endpoints are either already configured or not yet activated.</p>
         </section>
       `;
     }
@@ -704,12 +704,12 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
         <div class="subtle">Selezionati per import: <strong>${selected}</strong> / ${entries.length}</div>
         <table>
           <thead>
-            <tr><th></th><th>Tipo</th><th>Address</th><th>Key</th><th>Nome</th><th>Opzioni</th></tr>
+            <tr><th></th><th>Type</th><th>Address</th><th>Key</th><th>Name</th><th>Options</th></tr>
           </thead>
           <tbody>${rows}</tbody>
         </table>
         <div class="actions">
-          <button id="import_selected_candidates" type="button" ${this._savingConfig ? "disabled" : ""}>${this._savingConfig ? "Import in corso..." : "Importa selezionati in configurazione"}</button>
+          <button id="import_selected_candidates" type="button" ${this._savingConfig ? "disabled" : ""}>${this._savingConfig ? "Importing..." : "Import selected into configuration"}</button>
         </div>
       </section>
     `;
@@ -954,15 +954,15 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
 
         <section class="panel">
           <div class="row-between">
-            <h3>Discovery automatica</h3>
-            <button id="reload_gateways" type="button" ${loadingGateways}>Ricarica gateway</button>
+            <h3>Automatic discovery</h3>
+            <button id="reload_gateways" type="button" ${loadingGateways}>Reload gateways</button>
           </div>
           <div class="grid">
             <label>Gateway
               <select id="gateway" ${loadingGateways}>${this._renderGatewayOptions()}</select>
             </label>
           </div>
-          <p class="subtle">Raccolta passiva sempre attiva. I dispositivi vengono rilevati solo quando vengono realmente azionati (fisicamente o da altre app).</p>
+          <p class="subtle">Passive collection is always enabled. Devices are detected only when they are actually triggered (physically or by other apps).</p>
         </section>
 
         ${errorBlock}
@@ -971,15 +971,15 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
 
         <section class="panel">
           <div class="row-between">
-            <h3>Configurazione Dispositivi</h3>
-            <button id="reload_config" type="button" ${this._loadingConfig ? "disabled" : ""}>Ricarica</button>
+            <h3>Device Configuration</h3>
+            <button id="reload_config" type="button" ${this._loadingConfig ? "disabled" : ""}>Reload</button>
           </div>
           ${this._renderConfigDevices()}
         </section>
 
         <section class="panel">
           <details id="manual_section" ${this._state.manual_section_open ? "open" : ""}>
-            <summary>Aggiungi dispositivo manualmente</summary>
+            <summary>Add device manually</summary>
             <form id="manual_device_form">
               <div class="grid">
                 <label>Platform
@@ -990,10 +990,10 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
                     <option value="sensor" ${this._state.manual_platform === "sensor" ? "selected" : ""}>sensor</option>
                   </select>
                 </label>
-                <label>Key (opzionale)
+                <label>Key (optional)
                   <input id="manual_key" type="text" value="${this._esc(this._state.manual_key)}" ${configDisabled} />
                 </label>
-                <label>Nome
+                <label>Name
                   <input id="manual_name" type="text" value="${this._esc(this._state.manual_name)}" ${configDisabled} />
                 </label>
                 <label>${addressLabel}
@@ -1001,10 +1001,10 @@ class MyHOMEDiscoveryPanel extends HTMLElement {
                 </label>
                 ${sensorClassField}
               </div>
-              <p class="subtle">Platform: <code>${manualPlatform}</code> | campo richiesto: <code>${manualPlatform === "climate" ? "zone" : "where"}</code></p>
+              <p class="subtle">Platform: <code>${manualPlatform}</code> | required field: <code>${manualPlatform === "climate" ? "zone" : "where"}</code></p>
               ${manualFlags}
               <div class="actions">
-                <button type="submit" ${configDisabled}>${this._savingConfig ? "Salvataggio..." : "Salva dispositivo"}</button>
+                <button type="submit" ${configDisabled}>${this._savingConfig ? "Saving..." : "Save device"}</button>
               </div>
             </form>
           </details>

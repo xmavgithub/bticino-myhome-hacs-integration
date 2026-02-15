@@ -2,79 +2,93 @@
   <img src="custom_components/myhome/frontend/bticino-logo.svg" alt="bticino logo" width="180" />
 </p>
 
-# bticino MyHome Home Assistant Unofficial Integration
+# bticino MyHome Unofficial Integration
 
-Integrazione custom per collegare gateway BTicino/Legrand MyHOME a Home Assistant tramite OpenWebNet.
+Custom Home Assistant integration for BTicino/Legrand MyHome gateways over OpenWebNet.
 
-## Stato del progetto
+## Project Status
 
-Questa repository mantiene e sviluppa una versione forkata dell'integrazione MyHOME con focus su:
+This repository maintains and evolves a fork of the original MyHome integration, with focus on:
 
-- stabilita dei worker gateway
-- discovery attiva e discovery by activation
-- pannello web per discovery e configurazione dispositivi
-- miglior supporto climate e power
+- gateway worker stability
+- active discovery and passive discovery from bus activity
+- web UI for device discovery and configuration
+- stronger climate and power support
 
-## Funzionalita principali
+## Main Features
 
-- setup gateway tramite Config Flow
-- gestione entita: light, cover, climate, sensor, switch, binary_sensor
-- servizi custom MyHOME (sync, send_message, discovery)
-- configurazione dispositivi dal pannello web (senza dipendenza da `myhome.yml`)
-- discovery attiva e import diretto in configurazione
-- inserimento e rimozione manuale dispositivi da UI
-- supporto discovery power (WHO 18)
-- libreria OWNd (autore: anotherjulien) vendorizzata nell'integrazione (versione 0.7.49)
+- gateway setup through Home Assistant Config Flow
+- supported platforms: `light`, `cover`, `climate`, `sensor`, `switch`, `binary_sensor`
+- custom MyHome services (`sync_time`, `send_message`, discovery services)
+- device configuration from web UI (no mandatory `myhome.yml` dependency)
+- direct import of discovered devices into runtime configuration
+- manual add/remove of devices from the UI
+- power endpoint discovery support (`WHO 18`)
+- OWNd library vendored inside the integration (`0.7.49`, author: `anotherjulien`)
 
-## Requisiti
+## Requirements
 
-- Home Assistant
-- accesso IP al gateway MyHOME nella stessa rete
+- Home Assistant (Core or Container)
+- IP connectivity from Home Assistant to your MyHome gateway
 
-## Installazione
+## Installation
 
-### Via HACS
+### HACS (recommended)
 
-1. Aggiungi questa repository come custom repository (categoria `Integration`).
-2. Installa `MyHOME` da HACS.
-3. Riavvia Home Assistant.
+Prerequisite: HACS must already be installed.
 
-### Manuale
+1. Open Home Assistant and go to `HACS`.
+2. Open the top-right menu (`⋮`) and choose `Custom repositories`.
+3. Add:
+   - Repository: `https://github.com/xmavgithub/bticino-myhome-hacs-integration`
+   - Category: `Integration`
+4. Click `Add`.
+5. Search for `bticino MyHome` in HACS and open the integration page.
+6. Click `Download` and complete installation.
+7. Restart Home Assistant.
+8. Go to `Settings` -> `Devices & Services` -> `Add Integration`.
+9. Search for `bticino MyHome` and complete the config flow.
 
-1. Copia `custom_components/myhome` in `config/custom_components/myhome`.
-2. Riavvia Home Assistant.
-3. Configura il gateway dalla UI di Home Assistant.
+Optional direct link:
 
-## Configurazione dispositivi
+`https://my.home-assistant.io/redirect/hacs_repository/?owner=xmavgithub&repository=bticino-myhome-hacs-integration&category=integration`
 
-La configurazione dei dispositivi avviene dal pannello web MyHOME:
+### Manual
 
-- `MyHOME Setup` per discovery attiva
-- `Discovery by Activation` per raccolta passiva
-- `Configurazione Dispositivi` per inserimento manuale, import discovery e rimozione
+1. Copy `custom_components/myhome` to `config/custom_components/myhome`.
+2. Restart Home Assistant.
+3. Add and configure `bticino MyHome` from `Settings` -> `Devices & Services`.
 
-## Compatibilita legacy YAML
+## Device Configuration
 
-Se esiste un file legacy (es. `myhome.yml`), puo essere usato una sola volta per migrazione iniziale verso lo storage interno dell'integrazione.
+Use the integration web panel to manage devices:
 
-Esempio legacy disponibile in:
+- automatic discovery by activation (passive collection)
+- import discovered devices into configuration
+- manual device creation and deletion
+
+## Legacy YAML Migration
+
+If a legacy YAML file (for example `myhome.yml`) is present, it can be used for one-time migration into integration storage.
+
+Example legacy file:
 
 - `examples/myhome.yml`
 
-## Troubleshooting rapido
+## Troubleshooting
 
-- Se non arrivano stati dopo un aggiornamento, riavvia Home Assistant.
-- Se la discovery fallisce, controlla i log di `custom_components.myhome`.
-- Verifica che il gateway sia raggiungibile e credenziali corrette.
+- If entities stop updating after changes, restart Home Assistant.
+- If discovery fails, inspect logs for `custom_components.myhome`.
+- Verify gateway reachability, IP address, and credentials.
 
-## Fork e crediti
+## Fork Credits
 
-Questo progetto e stato avviato come fork dell'ottimo lavoro originale di `anotherjulien`:
+This project started as a fork of the original integration:
 
 - https://github.com/anotherjulien/MyHOME
 
-Grazie a tutti i contributori del progetto originale e a chi contribuisce a questa evoluzione.
+Thanks to the original maintainers and contributors.
 
-## Licenza
+## License
 
-Distribuito sotto licenza presente nel file `LICENSE`.
+See `LICENSE`.
