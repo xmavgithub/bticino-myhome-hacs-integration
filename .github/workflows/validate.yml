@@ -1,0 +1,26 @@
+name: Validate
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  validate:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v2"
+      - name: Skip HACS validation on private repos
+        if: ${{ github.event.repository.private }}
+        run: echo "Repository is private. Skipping HACS action checks that require public raw file access."
+      - name: HACS validation
+        if: ${{ !github.event.repository.private }}
+        uses: "hacs/action@main"
+        env:
+          REPOSITORY_REF: "${{ github.head_ref || github.ref_name }}"
+        with:
+          category: "integration"
+          repository: ${{ github.repository }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          ignore: "description topics"

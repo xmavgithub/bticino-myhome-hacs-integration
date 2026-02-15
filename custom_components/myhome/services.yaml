@@ -1,0 +1,105 @@
+sync_time:
+  name: Syncronize time
+  description: Syncronize gateway's time to HA local time.
+  fields:
+    gateway:
+      name: Gateway
+      description: The gateway's MAC address, as present in the config.
+      example: 00:03:50:00:00:00
+
+send_message:
+  name: Send message
+  description: Send an arbitrary (but valid) OpenWebNet message to the gateway.
+  fields:
+    gateway:
+      name: Gateway
+      description: The gateway's MAC address, as present in the config.
+      example: 00:03:50:00:00:00
+    message:
+      name: Message
+      description: Valid OpenWebNet message.
+      example: "*1*0*0##"
+
+start_sending_instant_power:
+  name: Start sending instant power
+  description: Get automatic instant power draw updates for a sensor.
+  fields:
+    entity_id:
+      name: Entity
+      description: Name(s) of entities that will start sending instant power information.
+      example: "sensor.general_power"
+    duration:
+      name: Duration
+      description: For how long the instant power information will be sent.
+      example: "60"
+
+discover_devices:
+  name: Discover devices
+  description: Scan addresses and suggest YAML for discovered lights, covers, climate and power sensors.
+  fields:
+    gateway:
+      name: Gateway
+      description: The gateway MAC address, as present in the config.
+      example: 00:03:50:00:00:00
+    scan_lights:
+      name: Scan lights
+      description: Scan light endpoints (WHO 1).
+      example: true
+    scan_covers:
+      name: Scan covers
+      description: Scan cover/shutter endpoints (WHO 2).
+      example: true
+    scan_climate:
+      name: Scan climate
+      description: Scan climate zones/endpoints (WHO 4).
+      example: true
+    scan_power:
+      name: Scan power
+      description: Scan power/energy endpoints (WHO 18, default WHERE 51).
+      example: true
+    area_start:
+      name: Area start
+      description: Start area value (0-10).
+      example: 0
+    area_end:
+      name: Area end
+      description: End area value (0-10).
+      example: 0
+    point_start:
+      name: Point start
+      description: Start point value (0-15).
+      example: 1
+    point_end:
+      name: Point end
+      description: End point value (0-15).
+      example: 15
+    duration:
+      name: Duration
+      description: Wait time in seconds to collect responses (2-30).
+      example: 8
+
+set_discovery_by_activation:
+  name: Set discovery by activation
+  description: Enable or disable passive discovery from bus activity.
+  fields:
+    gateway:
+      name: Gateway
+      description: The gateway MAC address, as present in the config.
+      example: 00:03:50:00:00:00
+    enabled:
+      name: Enabled
+      description: If true, collect discovered endpoints when devices are physically activated.
+      example: true
+
+show_activation_discovery:
+  name: Show activation discovery
+  description: Show a notification with entities discovered by passive activation.
+  fields:
+    gateway:
+      name: Gateway
+      description: The gateway MAC address, as present in the config.
+      example: 00:03:50:00:00:00
+    clear:
+      name: Clear
+      description: If true, clear collected activation discovery results after showing them.
+      example: false

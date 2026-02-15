@@ -1,0 +1,7 @@
+ha_data/
+.git/
+.github/
+*.md
+*.pyc
+__pycache__/
+.DS_Store
